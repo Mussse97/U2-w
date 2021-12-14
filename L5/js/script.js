@@ -6,7 +6,7 @@ var carDir = 1;			// Riktning för bilen, index till carImgs
 var carElem;			// Referens till img-element för bilen
 const xStep = 5;		// Antal pixlar som bilen ska förflytta sig i x-led
 const yStep = 5;		// eller y-led i varje steg
-const timerStep = 20;	// Tid i ms mellan varje steg i förflyttningen
+const timerStep = 5;	// Tid i ms mellan varje steg i förflyttningen
 var timerRef = null;	// Referens till timern för bilens förflyttning
 var startBtn;			// Referens till startknappen
 var stopBtn;			// Referens till stoppknappen
