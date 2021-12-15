@@ -98,12 +98,11 @@ function startCheckCampaign(){
 
 function endCheckCampaign(){
 	this.style.backgroundcolor="";
-	toUpperCase();
+	
 }
-
 function checkCampaign(){
-	const re= /^[A-Z]{3}-\d{2}-[A-Z]{1}\d{1}/i;
-	if (re.test(this.value))this.style.backgroundcolor= "#6F9";
-	else this.style.backgroundcolor= "#F99"; 
+	const re= [/^[A-Z]{3}-\d{2}-[A-Z]{1}\d{1}/ig];
+	if (re.test(this.value))this.style.backgroundColor= "#6F9";
+	else this.style.backgroundColor= "#F99"; 
 }
 
