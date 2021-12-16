@@ -52,7 +52,7 @@ function startGame() {
 	let ix =allWords.indexOf(tempList[r]); // Sparar bildens nummer och lägger det i ix variabeln
 	imgElems[i].src= "img/" + ix + ".jpg"; // lägger bilden som bestäms av ix variabeln.
 	tempList.splice(r,1); // tar bort order som är valt från tempList.
-	imgElems[i].id.ix; // sparar ix variabeln i img-taggens id-attribut.
+	imgElems[i].id=ix; // sparar ix variabeln i img-taggens id-attribut.
 	}
 	for(let i=0; i < 4; i++){ // ytelligare fyra nya ord ur tempList och sparas i words.
 		let r=Math.floor(Math.random()*tempList.length);
@@ -72,7 +72,7 @@ function startGame() {
 		answerElems[i].innerHTML=""; // tar bort användarens svar.
 		correctElems[i].innerHTML=""; // tar bort det rätta svaret.
 	}
-	msgElem=""; // tar bort texten.
+	msgElem.innerHTML=""; // tar bort texten.
 	startGameBtn.disabled=true; // start knappen akttiveras
 	checkAnswersBtn.disabled=false; // check knappen inaktiveras
 } // End startGame
@@ -136,7 +136,8 @@ function wordOverList(e) { // e är Event-objektet
 function moveBackToList(word) { // word är det ord som ska flyttas tillbaks
 	for (i=0; i < wordElems.length; i++){ // går igenom all ord i wordElems.
 		if (wordElems[i].innerHTML==""){ // kontrollerar att elemtet är tomt.
-			wordElems[i].innerHTML=word; break // hitar en ledig plats att sätta ordet och sendan avbryter loopen.
+			wordElems[i].innerHTML=word; 
+			break; // hitar en ledig plats att sätta ordet och sendan avbryter loopen.
 		}
 	}
 } // End moveBackToList
@@ -144,31 +145,30 @@ function moveBackToList(word) { // word är det ord som ska flyttas tillbaks
 // Kontrollera användarens svar och visa de korrekta svaren
 function checkAnswers() {
 	for (let i=0; i < answerElems.length;  i++){ // kontrollerar orden som har blivit dragna till bilder.
-		if (wordElems=="") // kontrollerar om elementet är tomt.
-		alert();
+		if (answerElems[i].innerHTML==""){ // kontrollerar om elementet är tomt.
+		alert("Lägg in ett ett ord för varje bild."); // alert som visas när man inte dragit ett ord till alla bilder.
 		return; // avbryter funkitonen.
+		}
 	}
 	for (let  i=0; i < wordElems.length;  i++){
 		wordElems[i].draggable=false; // kan inte dra ord.
 		wordElems[i].removeEventListener("dragstart", dragstartWord); // tar bort händelsehanteraren.
 		wordElems[i].removeEventListener("dragend", dragendWord); // tar bort händelsehanteraren.
 	}
-	for (let  i=0; i < wordElems.length;  i++){
+	for (let  i=0; i < answerElems.length;  i++){
 		answerElems[i].draggable=false; // kan inte dra ord.
 		answerElems[i].removeEventListener("dragstart", dragstartWord); // tar bort händelsehanteraren.
 		answerElems[i].removeEventListener("dragend", dragendWord); // tar bort händelsehanteraren.
 	}
-	let points; // inför en ny variabel.
-	points=0 // sätter den nya variablen till 0
+	let points=0; // inför en ny variabel och sätter den nya variablen till 0.
 	for (let i=0; i < answerElems.length; i++){ // går igenom orden i answerElems.
-		let ix=imgElems; // inför variabeln ix och lägger den i id-attributet som ImgElems refererar till.
+		let ix=imgElems[i].id; // inför variabeln ix och lägger den i id-attributet som ImgElems refererar till.
 		if (answerElems[i].innerHTML== allWords[ix]) // gemför orden i answerElems med allWords.
 		points++; // om orden matchar ska det gå upp med ett poäng.
-		correctElems[i].innerHTML= allWords[ix] + "";
-		msgElem.innerHTML="Du fick" + points + "poäng";
-
+		correctElems[i].innerHTML= allWords[ix] + "-" + allDescriptions[ix]; // Skriver ut det rätta svaret från arrayen allwords och alldescriptions.
 	}
 	
+	msgElem.innerHTML="Du fick " + points + " poäng"; //skriver ut hur många poäng man fick.
 	startGameBtn.disabled=false; // start knappen inaktiveras
 		checkAnswersBtn.disabled=true; // check knappen aktiveras
 } // End checkAnswers

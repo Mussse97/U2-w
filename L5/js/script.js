@@ -63,14 +63,14 @@ function checkKey(e) {
 // ------------------------------
 // Initiera spelet och starta bilens rörelse
 function startGame() {
-	startBtn.disabled = true;
-	stopBtn.disabled = false;
+	startBtn.disabled = true; // inaktiverar start knappen.
+	stopBtn.disabled = false; -// inaktiverar star knappen.
 	document.activeElement.blur(); // Knapparna sätts ur focus, så att webbsidan kommer i fokus igen
 								   // Detta behövs för att man ska kunna känna av keydown i Firefox.
 	carElem.style.left = "0px";
 	carElem.style.top = "0px";
 	carDir = 1;
-	carElem.src = "img/" + carImgs[carDir];
+	carElem.src = "img/" + carImgs[carDir]; // byter ut bilden för bilen.
 	moveCar();
 	/* === Tillägg i labben === */
 	pigTimerRef= setTimeout(newPig,pigDuration); // grisen vissas inte innan två sekunder efter man har startat.
@@ -149,10 +149,10 @@ function checkHit(){
 	if (catchedPig==true) return;
 	let cSize= carElem.offsetWidth; // storlek på bilen.
 	let pSize= pigElem.offsetWidth; // storlek på grisen.
-	let cL= parseInt(carElem.style.left);
-	let cT= parseInt(carElem.style.top);
-	let pL= parseInt(pigElem.style.left);
-	let pT= parseInt(pigElem.style.top);
+	let cL= parseInt(carElem.style.left); // sparar bilens left i variabel.
+	let cT= parseInt(carElem.style.top); // sparar bilens top ii variabel.
+	let pL= parseInt(pigElem.style.left); // sparar grisens left i variabel.
+	let pT= parseInt(pigElem.style.top); // sparar grisens top i variabel.
 	if (cL +10 < pL+pSize && cL+cSize -10 > pL && cT +10 < pT+pSize && cT+cSize -10 > pT){ //vilkår för krock.
 		if (pigTimerRef !=null)clearTimeout(pigTimerRef)// stoppar timern för grisen
 		pigElem.src="img/smack.png"; // byter ut gris bilden mot smack.
