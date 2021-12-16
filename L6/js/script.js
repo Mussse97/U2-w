@@ -93,17 +93,17 @@ function checkField(){
 }
 
 function startCheckCampaign(){
-	this.style.backgroundColor="#F99";
+	this.style.backgroundColor="#F99"; // När man klickar i fätet ska det vara rött.
 }
 
 function endCheckCampaign(){
-	this.style.backgroundColor="";
-	this.value=this.value.toUpperCase();
+	this.style.backgroundColor=""; // sätter bakgrundsfärgen till tom sträng.
+	this.value=this.value.toUpperCase(); // omvandlar till stora bokstäver.
 }
 function checkCampaign(){
 	const re= /^[A-Z]{3}-\d{2}-[A-Z]{1}\d{1}/i; // reguljär uttryck för att peka ut kampanjkoden. den leter efter mönster som ABC-12-V4.
-	if (re.test(this.value))this.style.backgroundColor= "#6F9";
-	else this.style.backgroundColor= "#F99"; 
+	if (re.test(this.value))this.style.backgroundColor= "#6F9"; // kollar om uttrycker är rätt och om det är det ska det bli grönt
+	else this.style.backgroundColor= "#F99"; // är det FEL så ska  det bli rött.
 	
 }
 
