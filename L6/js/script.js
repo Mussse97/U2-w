@@ -7,7 +7,7 @@ var totalCostElem;	// Referens till elementet för totalpris
 // Initiera globala variabler och koppla funktion till knapp
 function init() {
 	formElem = document.getElementById("booking");
-	totalCostElem = document.getElementById("totalCost");
+	totalCostElem = document.getElementById("totalCost"); // Totala kostnaden för allt man har valt.
 	for (let i = 0; i < formElem.roomType.length; i++) { // Går igenom alla radio knappar.
 		formElem.roomType[i].addEventListener("click", checkIfFamilyRoom); // Händelse där checkIfFamlily room anropas nör man klickar.
 		formElem.roomType[i].parentNode.lastChild.textContent += " (" + roomPrice[i] + "kr)"; // Priset för de olika rummen ska visas på sidan.
@@ -19,8 +19,8 @@ function init() {
 		formElem.extra[i].addEventListener("click", calculateCost);
 	}
 	checkIfFamilyRoom();// ser till att de inaktiverade valen är där när man laddar in sidan.
-	formElem.nrOfNights.addEventListener("change", calculateCost);
-	calculateCost();
+	formElem.nrOfNights.addEventListener("change", calculateCost); //händelsehanterare för att räkna ut kostnaden när man klickar i.
+	calculateCost(); // anropar funktionen.
 
 	// Händelsehanterare för textfält som ska kontrolleras
 	formElem.city.addEventListener("blur", checkCity);
@@ -34,6 +34,7 @@ function init() {
 } // End init
 window.addEventListener("load", init);
 // ------------------------------
+// denna funktion kollar familjerum alternativet. Om det är det så ska antal peroner alternativer aktiveras, är det inte det så inaktiveras det.
 function checkIfFamilyRoom() {
 	if (formElem.roomType[2].checked) { // kontrollerar om man har valt familjerum.
 		formElem.persons.disabled = false; // har man valt det så ska "antal personer" alternativet inte vara inaktivt.
@@ -49,7 +50,7 @@ function checkIfFamilyRoom() {
 		formElem.extra[2].parentNode.style.color = "#000"; // Sätter färgen tilbaka till svart.
 	}
 }
-
+// I denna funktion så kontrollerar den vad för tillägg och rum samt dagar som är i klickade. Ser också till att priset uppdateras beroende på vad man har  valt.
 function calculateCost() {
 	let price; // inför price som en lokal variabel
 	for (let i = 0; i < formElem.roomType.length; i++) {
@@ -66,12 +67,13 @@ function calculateCost() {
 	let nrOfNights = formElem.nrOfNights.value; // inför ny variable där vi tar value från antal nätter.
 	totalCostElem.innerHTML = nrOfNights * price; // Skriver ut totala kostnaden.
 }
+// i denna funktion avläser vi value som ligger i this och sparar i variabeln city. Vi ändrar också till stora bokstäver samt lägger in nya inehållet i city i fältet.
 function checkCity() {
 	let city = this.value; // spara value på this i city
 	city = city.toUpperCase(); // Ändrar till versaler från gemener. 
 	this.value = city; // nya inehållet läggs i city.
 }
-
+// kontrollerar fälten telefon nummer och postnummer. ser till att det stämmer med de reguljära uttrycken. ger också fel meddelanden om det inte skulle stämma
 function checkField() {
 	const fieldNames = ["zipcode", "telephone"]; // array med reguljära uttryck för fälten.
 	const re = [
@@ -91,15 +93,16 @@ function checkField() {
 	}
 	else return true; // fätet är ok.
 }
-
+// När man klickar in i fältet så ska det vara en röd färg.
 function startCheckCampaign() {
 	this.style.backgroundColor = "#F99"; // När man klickar i fätet ska det vara rött.
 }
-
+// När man har klickat bort från fätet ska funktionen se till att det blir stora bokstäver.
 function endCheckCampaign() {
 	this.style.backgroundColor = ""; // sätter bakgrundsfärgen till tom sträng.
 	this.value = this.value.toUpperCase(); // omvandlar till stora bokstäver.
 }
+// kontroll för rätt uttryck som ska vara i kampanj fältet och bestämmer sedan vad för färg det ska vara boroende på om det är rätt eller fel.
 function checkCampaign() {
 	const re = /^[A-Z]{3}-\d{2}-[A-Z]{1}\d{1}/i; // reguljär uttryck för att peka ut kampanjkoden. den leter efter mönster som ABC-12-V4.
 	if (re.test(this.value)) this.style.backgroundColor = "#6F9"; // kollar om uttrycker är rätt och om det är det ska det bli grönt
