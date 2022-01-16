@@ -9,9 +9,9 @@ function init() {
 	formElem = document.getElementById("booking");
 	totalCostElem = document.getElementById("totalCost"); // Totala kostnaden för allt man har valt.
 	for (let i = 0; i < formElem.roomType.length; i++) { // Går igenom alla radio knappar.
-		formElem.roomType[i].addEventListener("click", checkIfFamilyRoom); // Händelse där checkIfFamlily room anropas nör man klickar.
+		formElem.roomType[i].addEventListener("click", checkIfFamilyRoom); // Händelse där checkIfFamlily room anropas när man klickar.
 		formElem.roomType[i].parentNode.lastChild.textContent += " (" + roomPrice[i] + "kr)"; // Priset för de olika rummen ska visas på sidan.
-		formElem.roomType[i].addEventListener("click", calculateCost);
+		formElem.roomType[i].addEventListener("click", calculateCost); // händelse där calculatecost anropas när man klickar
 	}
 
 	for (let i = 0; i < formElem.extra.length; i++) {
@@ -23,13 +23,13 @@ function init() {
 	calculateCost(); // anropar funktionen.
 
 	// Händelsehanterare för textfält som ska kontrolleras
-	formElem.city.addEventListener("blur", checkCity);
-	formElem.zipcode.addEventListener("blur", checkField);
-	formElem.telephone.addEventListener("blur", checkField);
+	formElem.city.addEventListener("blur", checkCity); //  Blur är en händelsehanterare för när något förlorat focus då anropas checkcity
+	formElem.zipcode.addEventListener("blur", checkField); //Blur är en händelsehanterare för när något förlorat focus då anropas checkfield
+	formElem.telephone.addEventListener("blur", checkField); //Blur är en händelsehanterare för när något förlorat focus då anropas checkfield
 	// Händelsehanterare för kampanjkod
-	formElem.campaigncode.addEventListener("focus", checkCampaign);
-	formElem.campaigncode.addEventListener("keyup", checkCampaign);
-	formElem.campaigncode.addEventListener("blur", endCheckCampaign);
+	formElem.campaigncode.addEventListener("focus", checkCampaign); // focus är motsatsen av blur vilket betyder när det är i focus anropas checkcampaign
+	formElem.campaigncode.addEventListener("keyup", checkCampaign); // keyup är en händelsehanterare för när man släpper en knapp och då anropas checkcampaign
+	formElem.campaigncode.addEventListener("blur", endCheckCampaign); // när det inte är inte är i focus anropas endcheckcampaign
 
 } // End init
 window.addEventListener("load", init);
@@ -41,7 +41,7 @@ function checkIfFamilyRoom() {
 		formElem.persons.parentNode.style.color = "#000"; // ändrar färgen till svart
 		formElem.extra[2].disabled = true; // inaktiverar ectra valet sjöutsikt
 		formElem.extra[2].parentNode.style.color = "#999"; // sätter valet och texten till grå färg
-		formElem.extra[2].checked = false;
+		formElem.extra[2].checked = false; // rad för att avmarkera valet i.
 	}
 	else {
 		formElem.persons.disabled = true; // om familje rum inte är valt så ska antal personer alternativet vara inaktivt
