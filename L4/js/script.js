@@ -57,8 +57,10 @@ function startGame() {
 	for (let i = 0; i < 4; i++) { // ytelligare fyra nya ord ur tempList och sparas i words.
 		let r = Math.floor(Math.random() * tempList.length);
 		words.push(tempList[r]); // lägger till ett element i slutet av en array.
-		words.sort(); // sorterar words.
+		tempList.splice(r, 1); // tar bort ordet som är valt.
+
 	}
+	words.sort(); // sorterar words
 	for (let i = 0; i < wordElems.length; i++) { // Går igenom alla ord i wordElems.
 		wordElems[i].innerHTML = words[i]; // tilldela alla ord.
 		wordElems[i].addEventListener("dragstart", dragstartWord);// händelsehanterare flr när man drar
